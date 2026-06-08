@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal do Vendedor — CDD Curitiba</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7KEPR8W9E0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7KEPR8W9E0');
+</script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
+  :root {
+    --bg: #0f1117;
+    --surface: #181c27;
+    --surface2: #1e2335;
+    --accent1: #e8f04a;
+    --accent2: #4af0b0;
+    --accent3: #f04a8c;
+    --text: #f0f2f7;
+    --muted: #7a7f96;
+    --border: rgba(255,255,255,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* TELA INICIAL */
+  #home {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+  }
+
+  #home::before {
+    content: '';
+    position: fixed;
+    top: -40%;
+    left: -20%;
+    width: 80vw;
+    height: 80vw;
+    background: radial-gradient(circle, rgba(232,240,74,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  #home::after {
+    content: '';
+    position: fixed;
+    bottom: -40%;
+    right: -20%;
+    width: 80vw;
+    height: 80vw;
+    background: radial-gradient(circle, rgba(74,240,176,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .logo-area {
+    text-align: center;
+    margin-bottom: 3rem;
+    animation: fadeDown 0.7s ease both;
+  }
+
+  .logo-badge {
+    display: inline-block;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 0.4rem 1.2rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent1);
+    margin-bottom: 1.2rem;
+  }
+
+  .logo-area h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .logo-area h1 span {
+    color: var(--accent1);
+  }
+
+  .logo-area p {
+    margin-top: 0.8rem;
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 300;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    width: 100%;
+    max-width: 860px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.8rem;
+    cursor: pointer;
+    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    background: var(--surface2);
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card.yellow::before { background: var(--accent1); }
+  .card.green::before { background: var(--accent2); }
+  .card.pink::before { background: var(--accent3); }
+  .card.blue::before { background: #3b82f6; }
+
+  .card:hover.yellow { border-color: rgba(232,240,74,0.3); }
+  .card:hover.green { border-color: rgba(74,240,176,0.3); }
+  .card:hover.pink { border-color: rgba(240,74,140,0.3); }
+  .card:hover.blue { border-color: rgba(59,130,246,0.3); }
+
+  .card h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+
+  .card p {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .card-arrow {
+    position: absolute;
+    bottom: 1.4rem;
+    right: 1.4rem;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .yellow .card-arrow { background: rgba(232,240,74,0.15); color: var(--accent1); }
+  .green .card-arrow { background: rgba(74,240,176,0.15); color: var(--accent2); }
+  .pink .card-arrow { background: rgba(240,74,140,0.15); color: var(--accent3); }
+  .blue .card-arrow { background: rgba(59,130,246,0.15); color: #3b82f6; }
+
+  .card:hover .card-arrow { opacity: 1; transform: translate(2px,-2px); }
+
+  /* TELA DE FERRAMENTA */
+  #frame-view {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    flex-direction: column;
+    z-index: 100;
+  }
+
+  #frame-view.active { display: flex; }
+
+  .frame-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1.2rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .back-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    padding: 0.45rem 1rem;
+    font-size: 0.82rem;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .back-btn:hover { background: var(--surface2); border-color: rgba(255,255,255,0.2); }
+
+  .frame-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .frame-pill {
+    margin-left: auto;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 50px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  .pill-yellow { background: rgba(232,240,74,0.12); color: var(--accent1); }
+  .pill-green { background: rgba(74,240,176,0.12); color: var(--accent2); }
+  .pill-pink { background: rgba(240,74,140,0.12); color: var(--accent3); }
+  .pill-blue { background: rgba(59,130,246,0.12); color: #3b82f6; }
+
+  #tool-frame {
+    flex: 1;
+    border: none;
+    width: 100%;
+  }
+
+  /* ANIMAÇÕES */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* MOBILE */
+  @media (max-width: 600px) {
+    .cards-grid { grid-template-columns: 1fr; }
+    .logo-area h1 { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TELA INICIAL -->
+<section id="home">
+  <div class="logo-area">
+    <div class="logo-badge">CDD Curitiba</div>
+    <h1>Portal do <span>Vendedor</span></h1>
+    <p>Selecione a ferramenta que deseja consultar</p>
+  </div>
+
+  <div class="cards-grid">
+
+    <a class="card yellow" onclick="openTool('https://cdd-curitiba.github.io/score5/Score5_Todas_Salas.html', 'Score 5 — Todas as Salas', 'yellow'); return false;" href="#">
+      <h2>Score 5</h2>
+      <p>Positivação consolidada por sala, setor, base e dia de visita.</p>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <a class="card green" onclick="openTool('https://cdd-curitiba.github.io/atendimentoprodutivo/comprador.html', 'Atendimento Produtivo', 'green'); return false;" href="#">
+      <h2>Atendimento Produtivo</h2>
+      <p>Consulta de carteira de compradores e indicadores de atendimento.</p>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <a class="card pink" onclick="openTool('https://cdd-curitiba.github.io/trocas/Trocas_Reposicoes.html', 'Trocas & Reposições', 'pink'); return false;" href="#">
+      <h2>Trocas & Reposições</h2>
+      <p>Acompanhamento de trocas aprovadas, pendentes e reprovadas.</p>
+      <div class="card-arrow">↗</div>
+    </a>
+
+    <a class="card blue" onclick="openTool('https://cdd-curitiba.github.io/comercial/Calculadora_Aderido.html', 'Calculadora Aderido', 'blue'); return false;" href="#">
+      <h2>Calculadora Aderido</h2>
+      <p>Cálculo e simulação de aderido por cliente.</p>
+      <div class="card-arrow">↗</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- TELA DA FERRAMENTA -->
+<div id="frame-view">
+  <div class="frame-header">
+    <button class="back-btn" onclick="goHome()">← Voltar</button>
+    <span class="frame-title" id="frame-title">—</span>
+    <span class="frame-pill" id="frame-pill"></span>
+  </div>
+  <iframe id="tool-frame" src="" allow="fullscreen"></iframe>
+</div>
+
+<script>
+  function openTool(url, title, color) {
+    gtag('event', 'open_tool', { tool_name: title });
+    document.getElementById('tool-frame').src = url;
+    document.getElementById('frame-title').textContent = title;
+    var pill = document.getElementById('frame-pill');
+    pill.textContent = 'CDD Curitiba';
+    pill.className = 'frame-pill pill-' + color;
+    document.getElementById('frame-view').classList.add('active');
+    document.getElementById('home').style.display = 'none';
+  }
+
+  function goHome() {
+    document.getElementById('frame-view').classList.remove('active');
+    document.getElementById('home').style.display = 'flex';
+    document.getElementById('tool-frame').src = '';
+  }
+</script>
+
+</body>
+</html>
